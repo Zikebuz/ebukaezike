@@ -79,8 +79,8 @@ export default function Footer() {
     { name: 'Projects', href: '#projects' },
     { name: 'Services', href: '#services' },
     { name: 'Blog', href: '#blog' },
-    { name: 'Testimonials', href: 'testimonials' },
-    { name: 'Store', href: 'store' },
+    { name: 'Testimonials', href: '#testimonials' },
+    { name: 'Store', href: '#store' },
     { name: 'Contact', href: '#contact' },
   ];
 
