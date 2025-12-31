@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FaGithub, FaTwitter, FaLinkedin, FaYoutube, FaArrowUp, FaFacebook, FaInstagram, FaCodepen, FaTimes } from 'react-icons/fa';
+import { FaGithub, FaTwitter, FaLinkedin, FaArrowUp, FaFacebook, FaInstagram, FaCodepen, FaTimes } from 'react-icons/fa';
 
 export default function Footer() {
   const footerRef = useRef(null);
@@ -66,7 +66,6 @@ export default function Footer() {
   const socialLinks = [
     { icon: <FaTwitter />, url: 'https://x.com/jswithzikebuz' },
     { icon: <FaLinkedin />, url: 'https://www.linkedin.com/in/jswithzikebuz/' },
-    // { icon: <FaYoutube />, url: 'https://www.youtube.com/@ebuztrend407' },
     { icon: <FaFacebook />, url: 'https://www.facebook.com/jswithzikebuz' },
     { icon: <FaInstagram />, url: 'https://www.instagram.com/jswithzikebuz/' },
     { icon: <FaGithub />, url: 'https://github.com/zikebuz' },
@@ -80,8 +79,8 @@ export default function Footer() {
     { name: 'Projects', href: '#projects' },
     { name: 'Services', href: '#services' },
     { name: 'Blog', href: '#blog' },
-    { name: 'Testimonials', id: 'testimonials' },
-    { name: 'Store', id: 'store' },
+    { name: 'Testimonials', href: 'testimonials' },
+    { name: 'Store', href: 'store' },
     { name: 'Contact', href: '#contact' },
   ];
 
