@@ -10,7 +10,7 @@ export default function Footer() {
   const footerRef = useRef(null);
   const linksRef = useRef([]);
   const socialRef = useRef([]);
-  
+
   // Modal State
   const [modalContent, setModalContent] = useState(null);
 
@@ -23,15 +23,15 @@ export default function Footer() {
       }
     });
 
-    tl.fromTo(linksRef.current, 
-      { opacity: 0, y: 20 }, 
+    tl.fromTo(linksRef.current,
+      { opacity: 0, y: 20 },
       { opacity: 1, y: 0, stagger: 0.05, duration: 0.8, ease: "power3.out" }
     )
-    .fromTo(socialRef.current, 
-      { scale: 0, opacity: 0 }, 
-      { scale: 1, opacity: 1, stagger: 0.1, duration: 0.5, ease: "back.out(1.7)" }, 
-      "-=0.4"
-    );
+      .fromTo(socialRef.current,
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, stagger: 0.1, duration: 0.5, ease: "back.out(1.7)" },
+        "-=0.4"
+      );
 
     const magneticIcons = socialRef.current;
     magneticIcons.forEach((icon) => {
@@ -52,7 +52,7 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
- const policies = {
+  const policies = {
     privacy: {
       title: "Privacy Policy",
       content: "Your privacy is important. We only collect basic analytics to improve user experience and ensure site security. No personal data is sold or shared with third parties. You have full control over your experience; no cookies are used to track you across other websites."
@@ -66,7 +66,7 @@ export default function Footer() {
   const socialLinks = [
     { icon: <FaTwitter />, url: 'https://x.com/jswithzikebuz' },
     { icon: <FaLinkedin />, url: 'https://www.linkedin.com/in/jswithzikebuz/' },
-    { icon: <FaYoutube />, url: 'https://www.youtube.com/@ebuztrend407' },
+    // { icon: <FaYoutube />, url: 'https://www.youtube.com/@ebuztrend407' },
     { icon: <FaFacebook />, url: 'https://www.facebook.com/jswithzikebuz' },
     { icon: <FaInstagram />, url: 'https://www.instagram.com/jswithzikebuz/' },
     { icon: <FaGithub />, url: 'https://github.com/zikebuz' },
@@ -80,23 +80,25 @@ export default function Footer() {
     { name: 'Projects', href: '#projects' },
     { name: 'Services', href: '#services' },
     { name: 'Blog', href: '#blog' },
+    { name: 'Testimonials', id: 'testimonials' },
+    { name: 'Store', id: 'store' },
     { name: 'Contact', href: '#contact' },
   ];
 
   return (
     <footer ref={footerRef} className="relative py-20 bg-white dark:bg-[#0f172a] overflow-hidden border-t border-gray-100 dark:border-gray-800/50">
-      
+
       {/* Policy Modal Overlay */}
       <AnimatePresence>
         {modalContent && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setModalContent(null)}
             className="fixed inset-0 z-[110] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
           >
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.5, y: 100, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.5, y: 100, opacity: 0 }}
@@ -104,7 +106,7 @@ export default function Footer() {
               onClick={(e) => e.stopPropagation()}
               className="bg-white dark:bg-gray-900 p-8 rounded-3xl shadow-2xl max-w-md w-full relative border border-gray-100 dark:border-gray-800"
             >
-              <button 
+              <button
                 onClick={() => setModalContent(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-primary transition-colors"
               >
@@ -124,7 +126,7 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10" />
 
       <div className="max-w-6xl mx-auto px-6 flex flex-col items-center">
-        <button 
+        <button
           onClick={scrollToTop}
           className="group mb-12 flex flex-col items-center gap-2 transition-all hover:-translate-y-2"
         >
@@ -136,7 +138,7 @@ export default function Footer() {
 
         <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-12 text-center">
           {navLinks.map((link, i) => (
-            <Link 
+            <Link
               key={link.name}
               href={link.href}
               ref={el => linksRef.current[i] = el}
@@ -165,13 +167,13 @@ export default function Footer() {
         <div className="w-full pt-8 border-t border-gray-100 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-gray-400 uppercase tracking-widest text-center md:text-left">
           <p>© {new Date().getFullYear()} Ebuka Ezike portfolio</p>
           <div className="flex gap-6">
-            <button 
+            <button
               onClick={() => setModalContent(policies.privacy)}
               className="cursor-pointer hover:text-primary transition-colors uppercase"
             >
               Privacy Policy
             </button>
-            <button 
+            <button
               onClick={() => setModalContent(policies.terms)}
               className="cursor-pointer hover:text-primary transition-colors uppercase"
             >
