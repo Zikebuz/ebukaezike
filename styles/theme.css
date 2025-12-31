@@ -1,0 +1,20 @@
+/* styles/theme.css */
+:root {
+  --primary: #915EFF;
+  --secondary: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Override variables if needed */
+  }
+}
+
+/* Custom scrollbar for modern look */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 4px;
+}
