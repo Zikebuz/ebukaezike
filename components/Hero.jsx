@@ -5,7 +5,64 @@ import { FaDownload, FaEnvelope, FaLock } from 'react-icons/fa';
 import gsap from 'gsap';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const ThreeScene = dynamic(() => import('./ThreeScene'), { ssr: false });
+// Custom Loader Component for ThreeScene
+const ThreeLoader = () => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(timer);
+          return 100;
+        }
+        return prev + 5; // Adjust speed of the counter here
+      });
+    }, 100);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center justify-center w-full h-full space-y-4">
+      <div className="relative w-20 h-20">
+        {/* Animated Ring */}
+        <svg className="w-full h-full transform -rotate-90">
+          <circle
+            cx="40"
+            cy="40"
+            r="36"
+            stroke="currentColor"
+            strokeWidth="3"
+            fill="transparent"
+            className="text-gray-100 dark:text-gray-800"
+          />
+          <circle
+            cx="40"
+            cy="40"
+            r="36"
+            stroke="currentColor"
+            strokeWidth="3"
+            fill="transparent"
+            strokeDasharray={226}
+            strokeDashoffset={226 - (226 * progress) / 100}
+            className="text-primary transition-all duration-300 ease-out"
+          />
+        </svg>
+        <span className="absolute inset-0 flex items-center justify-center text-xs font-black text-primary">
+          {progress}%
+        </span>
+      </div>
+      <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400 animate-pulse">
+        Initializing Engine
+      </p>
+    </div>
+  );
+};
+
+const ThreeScene = dynamic(() => import('./ThreeScene'), { 
+  ssr: false,
+  loading: () => <ThreeLoader /> 
+});
 
 export default function Hero() {
   const titleRef = useRef(null);
@@ -43,8 +100,6 @@ export default function Hero() {
   };
 
   useEffect(() => {
-    // Ensure elements are visible immediately if GSAP fails, 
-    // but then animate them from hidden state.
     const targets = [titleRef.current, subtitleRef.current, textRef.current, buttonsRef.current];
     
     gsap.fromTo(targets, 
