@@ -6,7 +6,7 @@ const projects = [
     category: 'Web Development',
     image: '/images/newstarn.jpg',
     // shortDesc: 'An online store built with Next.js and Tailwind CSS.',
-    fullDesc: 'Is a news and information curations system that allows users to read and follow up on latest trends categorically.',
+    fullDesc: 'A news and information curations system that allows users to read and follow up on latest trends categorically.',
     // tags: ['Next.js', 'Tailwind', 'Stripe'],
     caseStudy: {
       // problem: 'Client needed an online store to sell products and process payments.',
@@ -23,7 +23,7 @@ const projects = [
     category: 'Web Development',
     image: '/images/minicom-ten.jpg',
     // shortDesc: 'An online store built with Next.js and Tailwind CSS.',
-    fullDesc: "A miniature ecommerce web application that enables users to order an item, add the item to cart and pay instantly online.",
+    fullDesc: "A miniature ecommerce web application that enables users to order an item, add the item to cart and pay instantly for it online.",
     // tags: ['Next.js', 'Tailwind', 'Stripe'],
     caseStudy: {
       // problem: 'Client needed an online store to sell products and process payments.',
@@ -41,7 +41,7 @@ const projects = [
     category: 'Web Development',
     image: '/images/coinradar.jpg',
     // shortDesc: 'An online store built with Next.js and Tailwind CSS.',
-    fullDesc: 'Developed a full-featured e-commerce website with user authentication, product listings, and a shopping cart. Implemented modern design principles and SEO optimization.',
+    fullDesc: 'An app for crypto traders or investors who wants to convert their local currency into cryptocurrencies equivalent.',
     // tags: ['Next.js', 'Tailwind', 'Stripe'],
     caseStudy: {
       // problem: 'Client needed an online store to sell products and process payments.',
