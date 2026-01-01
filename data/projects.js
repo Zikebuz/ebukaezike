@@ -114,7 +114,7 @@ const projects = [
     caseStudy: {
       // problem: 'Product launch lacked visual promotional content.',
       // solution: 'Produced engaging video content and managed targeted YouTube and social media ads.',
-      tools: ['Power Director', 'Quik App', 'YouTube'],
+      tools: ['Power Director', 'Quik App', 'PixelLab', 'Picsart', 'YouTube'],
       // results: 'Achieved over 100K views and increased product inquiries by 40%.',
     },
     liveLink: 'https://drive.google.com/file/d/1NexdzNqa0vDk6fJpE4Lg3JBCwaZj2w6p/view?usp=sharing',
