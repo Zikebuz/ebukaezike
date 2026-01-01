@@ -14,15 +14,15 @@ const ThreeLoader = ({ isReady }) => {
       setProgress((prev) => {
         // If 3D is ready, jump to 100, otherwise slow down at 90
         if (isReady) return 100;
-        if (prev >= 90) return 90; 
-        return prev + 2; 
+        if (prev >= 90) return 90;
+        return prev + 2;
       });
     }, 50);
     return () => clearInterval(timer);
   }, [isReady]);
 
   return (
-    <motion.div 
+    <motion.div
       exit={{ opacity: 0, scale: 0.8 }}
       className="flex flex-col items-center justify-center w-full h-full space-y-4 bg-white dark:bg-[#0f172a]"
     >
@@ -68,8 +68,8 @@ export default function Hero() {
   // Listen for the 3D Scene to finish its internal mounting
   useEffect(() => {
     const handleSceneLoad = () => {
-        // Adding a slight delay to ensure smooth transition
-        setTimeout(() => setIsSceneReady(true), 800);
+      // Adding a slight delay to ensure smooth transition
+      setTimeout(() => setIsSceneReady(true), 800);
     };
     window.addEventListener('three-scene-ready', handleSceneLoad);
     return () => window.removeEventListener('three-scene-ready', handleSceneLoad);
@@ -97,30 +97,30 @@ export default function Hero() {
 
   useEffect(() => {
     const targets = [titleRef.current, subtitleRef.current, textRef.current, buttonsRef.current];
-    gsap.fromTo(targets, 
-      { opacity: 0, y: 20 }, 
+    gsap.fromTo(targets,
+      { opacity: 0, y: 20 },
       { opacity: 1, y: 0, stagger: 0.2, duration: 1, ease: "power4.out", delay: 0.5 }
     );
   }, []);
 
   return (
     <section id="hero" className="relative flex flex-col md:flex-row items-center justify-between py-16 px-6 bg-white dark:bg-[#0f172a] overflow-hidden min-h-[75vh]">
-      
+
       {/* ACCESS GATE MODAL CODE (Hidden for brevity, keep your existing code here) */}
       <AnimatePresence>
         {showGate && (
-           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
-             {/* ... (Your existing Gate Modal Content) ... */}
-             <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }} className="gate-modal bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center border border-gray-100 dark:border-gray-700">
-                <FaLock className="mx-auto text-primary mb-4" size={30} />
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 uppercase tracking-tighter">Secure {activeType === 'contract' ? 'Contract' : 'Full-Time'} View</h3>
-                <input type="password" value={passkey} onChange={(e) => setPasskey(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleUnlock()} className={`w-full p-4 rounded-xl bg-gray-50 dark:bg-gray-900 border mb-4 focus:outline-none focus:border-primary text-gray-900 dark:text-white transition-all ${error ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'}`} placeholder="Access Code" autoFocus />
-                <div className="flex gap-3">
-                    <button onClick={() => { setShowGate(false); setPasskey(''); setError(false); }} className="flex-1 py-3 text-gray-500 font-bold uppercase text-[10px] tracking-widest">Cancel</button>
-                    <button onClick={handleUnlock} className="flex-1 py-3 bg-primary text-white rounded-xl font-bold uppercase text-[10px] tracking-widest shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 transition-all">Unlock</button>
-                </div>
-             </motion.div>
-           </motion.div>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
+            {/* ... (Your existing Gate Modal Content) ... */}
+            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }} className="gate-modal bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center border border-gray-100 dark:border-gray-700">
+              <FaLock className="mx-auto text-primary mb-4" size={30} />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 uppercase tracking-tighter">Secure {activeType === 'contract' ? 'Contract' : 'Full-Time'} View</h3>
+              <input type="password" value={passkey} onChange={(e) => setPasskey(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleUnlock()} className={`w-full p-4 rounded-xl bg-gray-50 dark:bg-gray-900 border mb-4 focus:outline-none focus:border-primary text-gray-900 dark:text-white transition-all ${error ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'}`} placeholder="Access Code" autoFocus />
+              <div className="flex gap-3">
+                <button onClick={() => { setShowGate(false); setPasskey(''); setError(false); }} className="flex-1 py-3 text-gray-500 font-bold uppercase text-[10px] tracking-widest">Cancel</button>
+                <button onClick={handleUnlock} className="flex-1 py-3 bg-primary text-white rounded-xl font-bold uppercase text-[10px] tracking-widest shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 transition-all">Unlock</button>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
 
@@ -136,7 +136,7 @@ export default function Hero() {
         <p ref={textRef} className="text-lg text-slate-600 dark:text-slate-300 max-w-lg leading-relaxed font-semibold opacity-0">
           Helping businesses scale through expert IT troubleshooting, full-stack web development, and system automation.
         </p>
-        
+
         <div ref={buttonsRef} className="flex flex-col sm:flex-row flex-wrap gap-4 pt-2 opacity-0">
           <a href="#contact" className="w-full sm:w-auto justify-center px-7 py-3 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all flex items-center">
             <FaEnvelope className="mr-2" /> Hire Me
@@ -149,26 +149,30 @@ export default function Hero() {
           </button>
         </div>
       </div>
-      
+
       {/* 3D SCENE CONTAINER */}
       <div className="w-full md:w-1/2 flex justify-center items-center relative min-h-[320px] md:min-h-[450px]">
         <AnimatePresence mode="wait">
-            {!isSceneReady && (
-                <div className="absolute inset-0 z-20">
-                    <ThreeLoader isReady={isSceneReady} />
-                </div>
-            )}
+          {!isSceneReady && (
+            <div className="absolute inset-0 z-20">
+              <ThreeLoader isReady={isSceneReady} />
+            </div>
+          )}
         </AnimatePresence>
-        
-        <motion.div 
-            animate={{ opacity: isSceneReady ? 1 : 0 }}
-            transition={{ duration: 1 }}
-            className="w-80 h-80 md:w-[450px] md:h-[450px]"
+
+        <motion.div
+          animate={{ opacity: isSceneReady ? 1 : 0 }}
+          transition={{ duration: 1 }}
+          className="w-80 h-80 md:w-[450px] md:h-[450px]"
         >
-          <ThreeScene />  
+          <ThreeScene />
         </motion.div>
       </div>
-
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
+        <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center pt-2">
+          <div className="w-1 h-2 bg-primary rounded-full" />
+        </div>
+      </div>
     </section>
   );
 }
