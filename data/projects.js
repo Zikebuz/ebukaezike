@@ -131,7 +131,7 @@ const projects = [
     caseStudy: {
       // problem: 'Product launch lacked visual promotional content.',
       // solution: 'Produced engaging video content and managed targeted YouTube and social media ads.',
-      tools: ['Adobe Premiere', 'Corel Draw'],
+      tools: ['Adobe Premiere', 'Adobe Photoshop', 'Corel Draw'],
       // results: 'Achieved over 100K views and increased product inquiries by 40%.',
     },
     liveLink: 'https://drive.google.com/file/d/177DOR-FX-hDBMqO6wSa6FlIVI7EXI8vf/view?usp=sharing',
