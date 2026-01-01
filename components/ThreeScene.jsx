@@ -3,15 +3,21 @@
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { TextureLoader } from 'three';
-import { useRef, Suspense } from 'react';
+import { useRef, Suspense, useEffect } from 'react';
 
 /* -----------------------------
    3D Object (INSIDE Canvas)
 ------------------------------ */
 function FloatingTorus() {
   const torusRef = useRef();
-  // Using your preferred texture loader
   const texture = useLoader(TextureLoader, '/textures/texture1.png');
+
+  // This ensures the scene signals "ready" after the texture is loaded
+  useEffect(() => {
+    if (texture) {
+      window.dispatchEvent(new Event('three-scene-ready'));
+    }
+  }, [texture]);
 
   useFrame((_, delta) => {
     if (!torusRef.current) return;
@@ -21,7 +27,6 @@ function FloatingTorus() {
 
   return (
     <mesh ref={torusRef}>
-      {/* Reduced Size: Radius 0.55, Tube 0.18 */}
       <torusKnotGeometry args={[0.55, 0.18, 128, 32]} />
       <meshStandardMaterial
         map={texture}
@@ -41,7 +46,12 @@ export default function ThreeScene() {
       camera={{ position: [0, 0, 4], fov: 45 }}
       dpr={[1, 1.5]}
       fallback={null}
-      gl={{ alpha: true }} // Ensures background transparency
+      gl={{ alpha: true }}
+      // onCreated fires once the canvas and gl renderer are initialized
+      onCreated={() => {
+        // Fallback signal in case there's no texture
+        window.dispatchEvent(new Event('three-scene-ready'));
+      }}
     >
       <ambientLight intensity={0.4} />
       <directionalLight position={[5, 5, 5]} intensity={1.2} />
