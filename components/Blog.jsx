@@ -12,7 +12,7 @@ export default function Blog() {
 
   useEffect(() => {
     fetchRSS().then((data) => {
-      setPosts(data.items.slice(0, 3));
+      setPosts(data.items.slice(0, 6));
     });
 
     gsap.registerPlugin(ScrollTrigger);
