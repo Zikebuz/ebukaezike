@@ -10,14 +10,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [navOpen, setNavOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
-  const [isScrolled, setIsScrolled] = useState(false);
   
+  // DETAIL: Changed initial state to 'hero' so the "Home" text is highlighted by default on page load.
+  const [activeSection, setActiveSection] = useState('hero');
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const navRef = useRef(null);
   const logoRef = useRef(null);
   const linksRef = useRef([]);
 
-  const logo = "/images/logo.png"; 
+  const logo = "/images/logo.png";
 
   const navLinks = [
     { name: 'About', id: 'about' },
@@ -25,8 +27,8 @@ export default function Navbar() {
     { name: 'Projects', id: 'projects' },
     { name: 'Services', id: 'services' },
     { name: 'Blog', id: 'blog' },
-     { name: 'Testimonials', id: 'testimonials' },
-      { name: 'Store', id: 'store' },
+    { name: 'Testimonials', id: 'testimonials' },
+    { name: 'Store', id: 'store' },
     { name: 'Contact', id: 'contact' },
   ];
 
@@ -41,6 +43,15 @@ export default function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       const scrollPosition = window.scrollY + 120;
+
+      // DETAIL: This "if" block checks if the user is at the top of the page.
+      // If scroll is less than 100px from top, it sets activeSection to 'hero'.
+      // This is what passes the highlight to the "Home" text and prevents "About" from stealing it.
+      if (window.scrollY < 100) {
+        setActiveSection('hero');
+        return; 
+      }
+
       for (const link of navLinks) {
         const section = document.getElementById(link.id);
         if (section) {
@@ -48,24 +59,26 @@ export default function Navbar() {
           const height = section.offsetHeight;
           if (scrollPosition >= top && scrollPosition < top + height) {
             setActiveSection(link.id);
-            break; 
+            break;
           }
         }
       }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [navLinks]);
 
-  // FIXED SCROLL LOGIC
   const handleScrollTo = (e, id) => {
     e.preventDefault();
-    setNavOpen(false); // Close menu first
+    setNavOpen(false); 
+
+    // DETAIL: Updates activeSection immediately when a user clicks, so the text highlight moves instantly.
+    setActiveSection(id);
 
     setTimeout(() => {
       const element = document.getElementById(id);
       if (element) {
-        const offset = 80; 
+        const offset = 80;
         const bodyRect = document.body.getBoundingClientRect().top;
         const elementRect = element.getBoundingClientRect().top;
         const elementPosition = elementRect - bodyRect;
@@ -76,26 +89,35 @@ export default function Navbar() {
           behavior: 'smooth'
         });
       }
-    }, 150); // Small delay to let menu animation start closing
+    }, 150); 
   };
 
   return (
     <nav ref={navRef} className={`fixed top-0 w-full z-50 transition-all duration-500 py-4 ${isScrolled ? 'bg-white/70 dark:bg-[#0f172a]/70 backdrop-blur-xl shadow-lg' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex justify-between items-center h-12">
-          
+
+          {/* DETAIL: This Link handles the "Home" section highlight */}
           <Link href="/" ref={logoRef} className="group flex items-center gap-2" onClick={(e) => handleScrollTo(e, 'hero')}>
             <div className="relative">
               <img src={logo} alt="logo" className="w-8 h-8 object-contain transition-transform group-hover:rotate-[360deg]" />
               <div className="absolute -inset-1 bg-primary/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-            <span className="font-black text-xl tracking-tighter text-gray-900 dark:text-white uppercase">Home</span>
+
+            {/* DETAIL: This is where the highlight is passed to the "Home" text.
+                If activeSection is 'hero', it uses 'text-primary' (the highlight color).
+                Otherwise, it uses the standard black/white colors. */}
+            <span className={`font-black text-xl tracking-tighter uppercase transition-colors duration-300 
+              ${activeSection === 'hero' ? 'text-primary' : 'text-gray-900 dark:text-white'}`}>
+              Home
+            </span>
           </Link>
 
           <div className="hidden md:flex items-center gap-1 bg-gray-100/50 dark:bg-gray-800/40 p-1 rounded-full border border-gray-200/50 dark:border-gray-700/50">
             {navLinks.map((link, index) => (
               <button key={link.id} ref={el => linksRef.current[index] = el} onClick={(e) => handleScrollTo(e, link.id)}
                 className={`relative px-5 py-2 text-[11px] font-black uppercase tracking-[0.15em] transition-all rounded-full ${activeSection === link.id ? 'text-white' : 'text-gray-500 dark:text-gray-400 hover:text-primary'}`}>
+                {/* DETAIL: Your original pill highlight remains untouched for all other sections. */}
                 {activeSection === link.id && <motion.div layoutId="nav-pill" className="absolute inset-0 bg-primary rounded-full -z-10" transition={{ type: "spring", bounce: 0.25, duration: 0.6 }} />}
                 {link.name}
               </button>
@@ -117,6 +139,10 @@ export default function Navbar() {
         {navOpen && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-2xl overflow-hidden border-b border-gray-100 dark:border-gray-800">
             <div className="flex flex-col p-6 gap-4">
+              {/* DETAIL: Added Home to mobile menu so the text highlight works on mobile too. */}
+              <button onClick={(e) => handleScrollTo(e, 'hero')} className={`text-left text-lg font-bold tracking-tight transition-colors ${activeSection === 'hero' ? 'text-primary' : 'text-gray-500'}`}>
+                Home
+              </button>
               {navLinks.map((link) => (
                 <button key={link.id} onClick={(e) => handleScrollTo(e, link.id)} className={`text-left text-lg font-bold tracking-tight transition-colors ${activeSection === link.id ? 'text-primary' : 'text-gray-500'}`}>
                   {link.name}
