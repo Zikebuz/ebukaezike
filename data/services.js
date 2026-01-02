@@ -49,16 +49,16 @@ const services = [
     audience: 'Businesses looking to grow online',
     why: 'Maximize ROI with strategic advertising on Google and social media.',
   },
-  // {
-  //   id: 7,
-  //   title: 'Website/App Testing (QA)',
-  //   priceRange: '$15 - $30 / hr',
-  //   description: 'Comprehensive testing to ensure your website/app is bug-free.',
-  //   audience: 'Developers and companies launching new products',
-  //   why: 'Deliver a polished, user-friendly product with minimal errors.',
-  // },
   {
     id: 7,
+    title: 'Website/App Testing (QA)',
+    priceRange: '$15 - $30 / hr',
+    description: 'Comprehensive testing to ensure your website/app is bug-free.',
+    audience: 'Developers and companies launching new products',
+    why: 'Deliver a polished, user-friendly product with minimal errors.',
+  },
+  {
+    id: 8,
     title: 'Music Distribution Assistance',
     priceRange: '$10 - $25 / hr',
     description: 'Help with distributing music to platforms like Spotify, Apple Music, etc.',
@@ -66,7 +66,7 @@ const services = [
     why: 'Get your music heard globally with professional distribution strategies.',
   },
   {
-    id: 8,
+    id: 9,
     title: 'Technical Writing & Documentation',
     priceRange: '$20 - $40 / hr',
     description: 'Creating clear and concise technical documentation, manuals, and tutorials.',
