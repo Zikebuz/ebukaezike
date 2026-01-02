@@ -113,7 +113,7 @@ export default function Hero() {
             {/* ... (Your existing Gate Modal Content) ... */}
             <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }} className="gate-modal bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center border border-gray-100 dark:border-gray-700">
               <FaLock className="mx-auto text-primary mb-4" size={30} />
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 uppercase tracking-tighter">Secure {activeType === 'contract' ? 'Contract' : 'Full-Time'} View</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 uppercase tracking-tighter"> View My {activeType === 'contract' ? 'Contract' : 'Full-Time'} Resume </h3>
               <input type="password" value={passkey} onChange={(e) => setPasskey(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleUnlock()} className={`w-full p-4 rounded-xl bg-gray-50 dark:bg-gray-900 border mb-4 focus:outline-none focus:border-primary text-gray-900 dark:text-white transition-all ${error ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'}`} placeholder="Access Code" autoFocus />
               <div className="flex gap-3">
                 <button onClick={() => { setShowGate(false); setPasskey(''); setError(false); }} className="flex-1 py-3 text-gray-500 font-bold uppercase text-[10px] tracking-widest">Cancel</button>
@@ -142,10 +142,10 @@ export default function Hero() {
             <FaEnvelope className="mr-2" /> Hire Me
           </a>
           <button onClick={(e) => handleResumeClick(e, 'https://docs.google.com/document/d/1ha8ekeMjwcXWe__kyWZKZge1SdE-VEDCSRBSKhAYwqc/edit?usp=sharing', 'contract')} className="w-full sm:w-auto justify-center px-7 py-3 border-2 border-primary/40 text-slate-900 dark:text-white rounded-xl font-bold hover:border-primary transition-all flex items-center bg-white/50 dark:bg-transparent">
-            <FaDownload className="mr-2" /> Contract CV
+            <FaDownload className="mr-2" /> Contract Resume 
           </button>
           <button onClick={(e) => handleResumeClick(e, 'https://docs.google.com/document/d/1sjmWq2vKOuv7_gJZzq315lmKsG3VoJ_BUHdShT5ex_o/edit?usp=sharing', 'fulltime')} className="w-full sm:w-auto justify-center px-7 py-3 border-2 border-primary/40 text-slate-900 dark:text-white rounded-xl font-bold hover:border-primary transition-all flex items-center bg-white/50 dark:bg-transparent">
-            <FaDownload className="mr-2" /> Full-Time CV
+            <FaDownload className="mr-2" /> Full-Time Resume
           </button>
         </div>
       </div>
