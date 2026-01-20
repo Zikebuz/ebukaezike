@@ -134,7 +134,7 @@ export default function Hero() {
           IT Consultant & Engineer
         </h2>
         <p ref={textRef} className="text-lg text-slate-600 dark:text-slate-300 max-w-lg leading-relaxed font-semibold opacity-0">
-          Helping businesses scale through expert IT troubleshooting, full-stack web development, and system automation.
+          Helping businesses scale through expert IT Support & troubleshooting, system automation, and full-stack web development.
         </p>
 
         <div ref={buttonsRef} className="flex flex-col sm:flex-row flex-wrap gap-4 pt-2 opacity-0">
